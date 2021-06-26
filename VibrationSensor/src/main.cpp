@@ -28,7 +28,7 @@ int16_t previous_z = 0;
 
 void loop()
 {
-  delay(100);
+  delay(10);
   imu.readAcc();
   snprintf(report, sizeof(report), "[%d, %d, %d]",
            imu.a.x - previous_x,

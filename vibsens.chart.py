@@ -133,12 +133,13 @@ class serialListener (threading.Thread):
 
     def receive_raw(self):
         if self.c is not None:
-
-            while self.c.in_waiting < 1:
-                pass
-            if self.c.read(1) is not b'[':
-                self.c.readline()
-
+            try:
+                while self.c.in_waiting < 1:
+                    pass
+                if self.c.read(1) is not b'[':
+                    self.c.readline()
+            except IOError:
+                return None
             response = ""
             try:
                 response = self.c.readline().decode("utf-8").strip()
